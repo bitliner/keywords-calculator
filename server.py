@@ -31,7 +31,7 @@ class calculate_keywords:
         data=web.data()
         json_data=json.loads(data)
         text=json_data['text']
-        print text
+        #print text
         keywords=rake.run(text)
         #return simplejson.dumps(dict([("%d,%d" % k, v) for k, v in keywords.items()]))
         return json.dumps(keywords)
