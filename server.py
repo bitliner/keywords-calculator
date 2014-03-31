@@ -1,31 +1,41 @@
 #!/usr/bin/env python
 import web
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
+import json
 
-tree = ET.parse('user_data.xml')
-root = tree.getroot()
+from rake import Rake 
+
+
+#tree = ET.parse('user_data.xml')
+#root = tree.getroot()
+
+rake=Rake("SmartStoplist.txt")
 
 urls = (
-    '/users', 'list_users',
-    '/users/(.*)', 'get_user'
+    '/keywords', 'calculate_keywords',
+    #'/users/(.*)', 'get_user'
 )
 
 app = web.application(urls, globals())
 
-class list_users:        
-    def GET(self):
-        output = 'users:[';
-        for child in root:
-            print 'child', child.tag, child.attrib
-            output += str(child.attrib) + ','
-        output += ']';
-        return output
-
+class calculate_keywords:        
+    def POST(self):
+        output='cciao'
+        data=web.data()
+        json_data=json.loads(data)
+        text=json_data['text']
+        print text
+        keywords=rake.run(text)
+        #return simplejson.dumps(dict([("%d,%d" % k, v) for k, v in keywords.items()]))
+        return json.dumps(keywords)
+"""
 class get_user:
     def GET(self, user):
 	for child in root:
 		if child.attrib['id'] == user:
 		    return str(child.attrib)
+"""
+
 
 if __name__ == "__main__":
     app.run()
