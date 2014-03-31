@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import web
-#import xml.etree.ElementTree as ET
 import json
 
 from rake import Rake 
