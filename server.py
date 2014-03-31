@@ -23,8 +23,8 @@ class calculate_keywords:
         web.header('Access-Control-Allow-Origin', '*')
         web.header('Access-Control-Allow-Credentials','true') 
         web.header('Content-Type','application/json') 
-        web.header['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
-        web.header['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
+        #web.header['Access-Control-Allow-Methods'] = 'GET, POST, PUT, OPTIONS'
+        #web.header['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
 
         output='cciao'
