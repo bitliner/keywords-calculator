@@ -22,7 +22,8 @@ app = web.application(urls, globals())
 class calculate_keywords:        
     def POST(self):
         web.header('Access-Control-Allow-Origin', '*')
-        #web.header('Access-Control-Allow-Credentials','true') 
+        web.header('Access-Control-Allow-Credentials','true') 
+        web.header('Content-Type','application/json') 
         output='cciao'
         data=web.data()
         json_data=json.loads(data)
@@ -35,7 +36,7 @@ class calculate_keywords:
 class index:
     def GET(self):
         web.header('Access-Control-Allow-Origin', '*')
-        #web.header('Access-Control-Allow-Credentials','true') 
+        web.header('Access-Control-Allow-Credentials','true') 
         return """
             <html>
                 <head></head>
