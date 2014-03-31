@@ -82,6 +82,10 @@ def generate_candidate_keywords(sentence_list, stopword_pattern):
 
 
 def calculate_word_scores(phraseList):
+    """
+    It returns an object whose keys are candidate words and the related value is the metric deg(w)/freq(q).
+    It takes as input a phrase list 
+    """
     word_frequency = {}
     word_degree = {}
     for phrase in phraseList:
@@ -108,6 +112,9 @@ def calculate_word_scores(phraseList):
 
 
 def generate_candidate_keyword_scores(phrase_list, word_score):
+    """
+    It generates the score for each candidate keyword, given the co-occurence matrix and the phrase list
+    """
     keyword_candidates = {}
     for phrase in phrase_list:
         keyword_candidates.setdefault(phrase, 0)
@@ -122,24 +129,25 @@ def generate_candidate_keyword_scores(phrase_list, word_score):
 class Rake(object):
     def __init__(self, stop_words_path):
         self.stop_words_path = stop_words_path
-        self.__stop_words_pattern = build_stop_word_regex(stoppath)
+        self.__stop_words_pattern = build_stop_word_regex(stop_words_path)
 
     def run(self, text):
+        # get phrase list/ list of candidate keywords, not still ranked
         sentence_list = split_sentences(text)
-
         phrase_list = generate_candidate_keywords(sentence_list, self.__stop_words_pattern)
 
+        # calculate co-occurences matrix
         word_scores = calculate_word_scores(phrase_list)
-
+        # score each candidae keyword
         keyword_candidates = generate_candidate_keyword_scores(phrase_list, word_scores)
-
+        # 
         sorted_keywords = sorted(keyword_candidates.iteritems(), key=operator.itemgetter(1), reverse=True)
         return sorted_keywords
 
 
 if test:
     text = "Compatibility of systems of linear constraints over the set of natural numbers. Criteria of compatibility of a system of linear Diophantine equations, strict inequations, and nonstrict inequations are considered. Upper bounds for components of a minimal set of solutions and algorithms of construction of minimal generating sets of solutions for all types of systems are given. These criteria and the corresponding algorithms for constructing a minimal supporting set of solutions can be used in solving all the considered types of systems and systems of mixed types."
-
+    """
     # Split text into sentences
     sentenceList = split_sentences(text)
     #stoppath = "FoxStoplist.txt" #Fox stoplist contains "numbers", so it will not find "natural numbers" like in Table 1.1
@@ -154,15 +162,22 @@ if test:
 
     # generate candidate keyword scores
     keywordcandidates = generate_candidate_keyword_scores(phraseList, wordscores)
-    if debug: print keywordcandidates
+    if debug:
+        print 'candidate keywords' 
+        print keywordcandidates
 
     sortedKeywords = sorted(keywordcandidates.iteritems(), key=operator.itemgetter(1), reverse=True)
-    if debug: print sortedKeywords
+    if debug:
+        print '\n', 'sorted keywrods' 
+        print sortedKeywords
 
     totalKeywords = len(sortedKeywords)
-    if debug: print totalKeywords
+    if debug:
+        print 'Total keywords' 
+        print totalKeywords
+    print 'Only the first 1/3 of the top candidate keywords'
     print sortedKeywords[0:(totalKeywords / 3)]
-
+    """
     rake = Rake("SmartStoplist.txt")
     keywords = rake.run(text)
     print keywords
