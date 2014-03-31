@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script>
+
+	$(document).ready(function(){
+		$('button').click(function(){
+			click();
+		})
+	})
+
+	var click=function(){
+
+
+
+		$.ajax({
+			method:'post',
+			url:'http://5.10.75.107:9001/keywords',
+			data:JSON.stringify({
+				text:$('textarea').val()
+			})
+		}).done(function(e){
+			alert(e)
+			var res='';
+			e.forEach(function(k){
+				res+=k[0]+' '; 
+			})
+			$('#results').text(res)
+		}).fail(function(e){
+			alert(JSON.stringify(e))
+		})
+
+	}
+
+	</script>
+</head>
+<body>
+	<h1>Welcome!<h1>
+	<h3>Give me some text, i will give you the related keywords</h3>
+
+<textarea style="width:100%;height:50%;">
+
+</textarea>
+<button>Click</button>
+<div id="results"></div>
+
+</body>
+</html>

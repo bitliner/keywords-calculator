@@ -40,13 +40,8 @@ class index:
     def GET(self):
         web.header('Access-Control-Allow-Origin', '*')
         web.header('Access-Control-Allow-Credentials','true') 
-        return """
-            <html>
-                <head></head>
-                <body>
-                    <h1>Welcome!</h1>
-                </body>
-            </html>"""
+        raise web.seeother('/static/index.html')
+        
 
 """
 class get_user:
