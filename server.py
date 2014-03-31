@@ -32,7 +32,7 @@ class calculate_keywords:
         return json.dumps(keywords)
 
 class index:
-    def GET(self, user):
+    def GET(self):
         return """
             <html>
                 <head></head>
