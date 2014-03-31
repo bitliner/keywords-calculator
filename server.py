@@ -9,7 +9,7 @@ from rake import Rake
 #tree = ET.parse('user_data.xml')
 #root = tree.getroot()
 
-rake=Rake("SmartStoplist.txt")
+rake=Rake("stop-words/italian.txt")
 
 urls = (
     '/keywords', 'calculate_keywords',
