@@ -29,7 +29,7 @@ class calculate_keywords:
         keywords=rake.run(text)
         #return simplejson.dumps(dict([("%d,%d" % k, v) for k, v in keywords.items()]))
         web.header('Access-Control-Allow-Credentials','true') 
-        web.header('Access-Control-Allow-Origin', 'http://5.10.75.107')
+        web.header('Access-Control-Allow-Origin', '*')
         return json.dumps(keywords)
 
 class index:
