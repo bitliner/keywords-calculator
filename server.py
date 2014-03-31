@@ -21,6 +21,8 @@ app = web.application(urls, globals())
 
 class calculate_keywords:        
     def POST(self):
+        web.header('Access-Control-Allow-Credentials','true') 
+        web.header('Access-Control-Allow-Origin', '*')
         output='cciao'
         data=web.data()
         json_data=json.loads(data)
@@ -28,8 +30,6 @@ class calculate_keywords:
         print text
         keywords=rake.run(text)
         #return simplejson.dumps(dict([("%d,%d" % k, v) for k, v in keywords.items()]))
-        web.header('Access-Control-Allow-Credentials','true') 
-        web.header('Access-Control-Allow-Origin', '*')
         return json.dumps(keywords)
 
 class index:
