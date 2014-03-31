@@ -13,6 +13,7 @@ rake=Rake("SmartStoplist.txt")
 
 urls = (
     '/keywords', 'calculate_keywords',
+    '/', 'index',
     #'/users/(.*)', 'get_user'
 )
 
@@ -28,6 +29,17 @@ class calculate_keywords:
         keywords=rake.run(text)
         #return simplejson.dumps(dict([("%d,%d" % k, v) for k, v in keywords.items()]))
         return json.dumps(keywords)
+
+class index:
+    def GET(self, user):
+        return """
+            <html>
+                <head></head>
+                <body>
+                    <h1>Welcome!</h1>
+                </body>
+            </html>"""
+
 """
 class get_user:
     def GET(self, user):
