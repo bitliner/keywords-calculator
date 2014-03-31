@@ -13,8 +13,7 @@ rake=Rake("SmartStoplist.txt")
 
 urls = (
     '/keywords', 'calculate_keywords',
-    '/', 'index',
-    #'/users/(.*)', 'get_user'
+    '/', 'index'
 )
 
 app = web.application(urls, globals())
