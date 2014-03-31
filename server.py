@@ -34,6 +34,8 @@ class calculate_keywords:
 
 class index:
     def GET(self):
+        web.header('Access-Control-Allow-Credentials','true') 
+        web.header('Access-Control-Allow-Origin', '*')
         return """
             <html>
                 <head></head>
